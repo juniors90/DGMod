@@ -3,4 +3,8 @@
 #
 # Reading the implementation part of the package.
 #
-ReadPackage( "YDCatOverkG", "gap/YDCatOverkG.gi");
+ReadPackage( "YDCatOverkG", "gap/YDCatOverkG.gi" );
+ReadPackage( "YDCatOverkG", "gap/GModElement.gi" ); 
+ReadPackage( "YDCatOverkG", "gap/basisforYDmodule.gi" );
+ReadPackage( "YDCatOverkG", "gap/tensorproductmatrix.gi" ); 
+

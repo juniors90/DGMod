@@ -4,4 +4,7 @@
 # Reading the declaration part of the package.
 #
 
-ReadPackage( "YDCatOverkG", "gap/YDCatOverkG.gd");
+ReadPackage( "YDCatOverkG", "gap/YDCatOverkG.gd" );
+ReadPackage( "YDCatOverkG", "gap/GModElement.gd" ); 
+ReadPackage( "YDCatOverkG", "gap/basisforYDmodule.gd" );
+ReadPackage( "YDCatOverkG", "gap/tensorproductmatrix.gd" );
