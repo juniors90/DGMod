@@ -27,7 +27,7 @@ GetCentralizers@:= function( G )
     
     centralizers := [];
     
-    conjClasses:= ConjugacyClasses(G);
+    conjClasses:= ConjugacyClasses( G );
     
     for c in conjClasses do
         rep := Representative(c);
@@ -45,7 +45,7 @@ GetCentralizers@:= function( G )
 end;
 
 
-GetCentralizerOfElement@:=function(G, g )
+GetCentralizerOfElement@ := function(G, g )
     local centralizer, sizeG, sizeC, classSize, check, idx, repElementSDP;
 
     if not (g in List(ConjugacyClasses(G), Representative)) then
@@ -79,26 +79,17 @@ end;
 
 
 InstallGlobalFunction( SimplesMod, function( G )
-    local base, c, i, irrepsGamma_g, simples, rho, chi, M_g_rho, centralizers, g;
+    local c, irrepsGamma_g, simples, rho, chi, weight, centralizers;
 
     simples:= [];;
     centralizers := GetCentralizers@( G );
 
     for c in centralizers do
         irrepsGamma_g := Irr( c.centralizer );
-        for i in [ 1 .. Length( irrepsGamma_g ) ] do
-            chi := irrepsGamma_g[ i ];;
+        for chi in irrepsGamma_g do
             rho := IrreducibleAffordingRepresentation( chi );;
-            M_g_rho := InducedSubgroupRepresentation( G, rho );;
-            base := TensorBasisForSimpleMod( G, c.rep, rho );;
-            Add( simples, rec( simple := M_g_rho,
-                               weight := rec( g := g, rho := rho ),
-                               base := base,
-                               generatorsofgroup := GeneratorsOfGroup(G),
-                               genimages := GeneratorsOfGroup(Image(M_g_rho)),
-                               G := StructureDescription(G),
-                               G_g := StructureDescription(Source(rho)))
-                );
+            weight:= rec(g:= c.g, rho:= rho);
+            Add( simples, SimplesModYD( G, weight) );
         od;
     od;
     return simples;
@@ -111,21 +102,10 @@ InstallGlobalFunction( SimplesModAttachedToElement, function(G, g )
     simples:= [];;
 
     irrepsGamma_g := Irr(  Centralizer(G, g) );
-    for i in [ 1 .. Length( irrepsGamma_g ) ] do
-        chi := irrepsGamma_g[ i ];;
+    for chi in irrepsGamma_g do
         rho := IrreducibleAffordingRepresentation( chi );;
         weight := rec( g := g, rho := rho );
-        M_g_rho := InducedSubgroupRepresentation( G, rho );;
-        base := TensorBasisForSimpleMod( G, g, rho );;
-        Add( simples, rec(
-            simple := M_g_rho,
-            weight := weight,
-            base := base,
-            generatorsofgroup := GeneratorsOfGroup(G),
-            genimages := GeneratorsOfGroup(Image(M_g_rho)),
-            G := StructureDescription(G),
-            G_g := StructureDescription(Source(rho))
-        ) );
+        Add( simples, SimplesModYD( G, weight) );
     od;
     return simples;
 end );

@@ -6,9 +6,10 @@
 #! YDCatOverkG is a package which does some
 #! interesting and cool things
 #!
-#! @Chapter Object of <M>{{}\textsubscript{G}^{G}\mathcal{YD}}</M>
+#! @Chapter Object of Yetter–Drinfeld categories over group algebras.
 #!
 #! @Section Definition of SimplesModYD Object
+#!
 #! @Arguments SimplesModYDObj
 DeclareRepresentation("IsSimplesModYDRep", IsAttributeStoringRep, []);
 #! @Arguments SimplesModYDObj
@@ -26,6 +27,8 @@ DeclareAttribute("Base", IsSimplesModYDObj);
 DeclareAttribute("GeneratorsOfG", IsSimplesModYDObj);
 #! @Arguments SimplesModYDObj
 DeclareAttribute("GeneratorsOfImages", IsSimplesModYDObj);
+#! @Arguments SimplesModYDObj
+DeclareAttribute("GroupAttachedToMod", IsSimplesModYDObj);
 #! @Arguments SimplesModYDObj
 DeclareAttribute("StructureDescriptionOfG", IsSimplesModYDObj);
 #! @Arguments SimplesModYDObj
