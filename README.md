@@ -1,6 +1,7 @@
 ![Build Status](https://github.com/juniors90/YDCatOverkG/actions/workflows/CI.yml/badge.svg)
 ![Docs Status](https://github.com/juniors90/YDCatOverkG/actions/workflows/docs.yml/badge.svg)
 ![Paper](https://github.com/juniors90/YDCatOverkG/actions/workflows/draft-pdf.yml/badge.svg)
+[![codecov](https://codecov.io/gh/juniors90/YDCatOverkG/graph/badge.svg?token=QyJGj6oZWS)](https://codecov.io/gh/juniors90/YDCatOverkG)
 [![issues](https://img.shields.io/github/issues/juniors90/YDCatOverkG?color=teal)](https://github.com/juniors90/YDCatOverkG/issues)
 [![GitHub contributors](https://img.shields.io/github/contributors/juniors90/YDCatOverkG?color=green)](https://github.com/juniors90/YDCatOverkG/graphs/contributors)
 [![Forks](https://img.shields.io/github/forks/juniors90/YDCatOverkG)](https://github.com/juniors90/YDCatOverkG/stargazers)
