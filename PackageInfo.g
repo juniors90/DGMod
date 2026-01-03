@@ -76,7 +76,41 @@ AvailabilityTest := ReturnTrue,
 
 TestFile := "tst/testall.g",
 
-#Keywords := [ "TODO" ],
+Keywords := [
+              "Yetter-Drinfeld categories",
+              "Hopf algebra",
+              "Group algebras",
+              "Representation theory"
+            ],
+
+AutoDoc := rec(
+    entities := rec(
+        VERSION := ~.Version,
+        DATE := ~.Date,
+        io := "<Package>io</Package>",
+        PackageName := "<Package>PackageName</Package>",
+    ),
+    TitlePage := rec(
+        Copyright := Concatenation(
+            "&copyright; 2025-2026 by Juan David Ferreira<P/>\n\n",
+            "This package may be distributed under the terms and conditions ",
+            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            ),
+        Abstract := Concatenation(
+            "&YDCatOverkG; is a &GAP; package that allows you to compute ",
+            "the simple objects of the Yetter–Drinfeld categories over ",
+            "group algebras.\n"
+            ),
+        Acknowledgements := Concatenation(
+             "This package was developed during my Ph.D. studies. ",
+             "I thank Agustín García Iglesias for ", 
+             "his guidance and helpful feedback.<P/>\n\n",
+            "This documentation was prepared using the ",
+            "&GAPDoc; package <Cite Key='GAPDoc'/>.\n",
+            "<P/>\n"
+            ),
+    ),
+),
 
 ));
 

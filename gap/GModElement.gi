@@ -17,16 +17,14 @@ end;
 InstallMethod(ViewString, "show G-Module element", [IsGModElementObj],
     function(t)
         return Concatenation(
-            "(", ViewString(GrpElement(t)), ") ⊗ ",
-            ViewString(VSpaceElement(t))
+            "( ", ViewString(GrpElement(t)), " , ", ViewString(VSpaceElement(t)), " )"
         );
 end);
 
 InstallMethod(String, "convert G-Module element to string", [IsGModElementObj],
     function(t)
         return Concatenation(
-            "(", String(GrpElement(t)), ") ⊗ ",
-            String(VSpaceElement(t))
+            "( ", ViewString(GrpElement(t)), " , ", String(VSpaceElement(t)), " )"
         );
 end);
 

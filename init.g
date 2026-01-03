@@ -10,3 +10,4 @@ ReadPackage( "YDCatOverkG", "gap/basisforYDmodule.gd" );
 ReadPackage( "YDCatOverkG", "gap/tensorproductmatrix.gd" );
 ReadPackage( "YDCatOverkG", "gap/matrixfordeltafunction.gd" );
 ReadPackage( "YDCatOverkG", "gap/deltafunction.gd" );
+ReadPackage( "YDCatOverkG", "gap/tensorproductofsimples.gd" );

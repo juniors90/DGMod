@@ -5,35 +5,6 @@
 # Implementations
 #
 
-
-# Diccionario de letras griegas para GAP
-GreekLetter := rec(
-    alpha := "α",   Alpha := "Α",
-    beta  := "β",   Beta  := "Β",
-    gamma := "γ",   Gamma := "Γ",
-    delta := "δ",   Delta := "Δ",
-    epsilon := "ε", Epsilon := "Ε",
-    zeta := "ζ",    Zeta := "Ζ",
-    eta := "η",     Eta := "Η",
-    theta := "θ",   Theta := "Θ",
-    iota := "ι",    Iota := "Ι",
-    kappa := "κ",   Kappa := "Κ",
-    lambda := "λ",  Lambda := "Λ",
-    mu := "μ",      Mu := "Μ",
-    nu := "ν",      Nu := "Ν",
-    xi := "ξ",      Xi := "Ξ",
-    omicron := "ο", Omicron := "Ο",
-    pi := "π",      Pi := "Π",
-    rho := "ρ",     Rho := "Ρ",
-    sigma := "σ",   Sigma := "Σ",
-    tau := "τ",     TauGL := "Τ",
-    upsilon := "υ", Upsilon := "Υ",
-    phi := "φ",     PhiGL := "Φ",
-    chi := "χ",     Chi := "Χ",
-    psi := "ψ",     Psi := "Ψ",
-    omega := "ω",   Omega := "Ω"
-);
-
 SimplesModYD := function( G, weight)
     local obj, M_g_rho, base;
     M_g_rho := InducedSubgroupRepresentation( G, weight.rho );;
@@ -50,6 +21,42 @@ SimplesModYD := function( G, weight)
     return obj;
 end;
 
+#############################################################################
+# Operation On  Simple Mod YD ( Multiplicative Element )                                      #
+#############################################################################
+
+InstallMethod(\*,
+    "multiply two SimplesModYD object",
+    [IsSimplesModYDObj, IsSimplesModYDObj],
+    function( simple1, simple2 )
+    local gens, mgens, gen1, gen2, newrho, rep;
+
+    if not( IsSimplesModYDObj( simple1 ) ) then
+        Error("first argument must be a SimplesModYDObj.");
+    fi;
+    if not( IsSimplesModYDObj( simple2 ) ) then
+        Error("second argument must be a SimplesModYDObj.");
+    fi;
+
+    gens  := simple1!.GeneratorsOfG;
+    gen1  := simple1!.GeneratorsOfImages;
+    gen2  := simple2!.GeneratorsOfImages;
+    mgens := List( [1..Length( gens )],
+                    i -> TensorProductOfMat( gen1[i], gen2[i] ) );
+    newrho := GroupHomomorphismByImagesNC( 
+                    simple1!.GroupAttachedToMod, Group( mgens )
+                );
+    rep := rec(
+            group             := simple1!.GroupAttachedToMod,
+            generatorsofgroup := gens,        # new feature
+            rho               := newrho,      # new feature
+            genimages         := mgens,
+            isRepresentation  := true,
+            dimension         := Length(mgens[1]),
+    );
+    return rep;
+end);
+
 ###########################################################
 # Print methods installation
 ###########################################################
@@ -57,7 +64,7 @@ end;
 InstallMethod(ViewString, "show D(G)-Module", [IsSimplesModYDObj],
     function(s)
         return Concatenation(
-            "< Simple D(G)-Module with weight ( g := ", ViewString(Weight(s).g), ", ", GreekLetter.rho, " := ", String(Weight(s).rho), " )>"
+            "<Simple D(G)-Module with weight ( g := ", ViewString(Weight(s).g), ", rho := ", String(Weight(s).rho), " )>"
         );
 end);
 
@@ -65,7 +72,7 @@ InstallMethod(String, "show D(G)-Module to string", [IsSimplesModYDObj],
     function(s)
         return Concatenation(
             "Weight := \n g := ", ViewString( Weight( s ).g ),
-                    ", \n ", GreekLetter.rho, " := ", String( Weight( s ).rho ), "\n",
+                    ", \n rho := ", String( Weight( s ).rho ), "\n",
             "M(g, rho) := ", String( Simple( s ) ), "\n",
             "Base := ", ViewString( Base( s ) ), "\n",
             "G := ", ViewString( GroupAttachedToMod(s)), "\n",
@@ -81,7 +88,7 @@ InstallMethod( Display, "for D(G)-Module object", [ IsSimplesModYDObj],
     Print(
         Concatenation(
             "Weight := \n g := ", ViewString( Weight( s ).g ),
-                    ", \n ", GreekLetter.rho, " := ", String( Weight( s ).rho ), "\n",
+                    ", \n rho := ", String( Weight( s ).rho ), "\n",
             "M(g, rho) := ", String( Simple( s ) ), "\n",
             "Base := ", ViewString( Base( s ) ), "\n",
             "G := ", ViewString( GroupAttachedToMod(s)), "\n",
