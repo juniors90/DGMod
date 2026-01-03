@@ -4,7 +4,7 @@
 #!
 DeclareRepresentation("IsGModElementRep", IsAttributeStoringRep, []);
 #!
-DeclareCategory("IsGModElementObj", IsGModElementRep and IsAdditiveElement);
+DeclareCategory("IsGModElementObj", IsGModElementRep and IsMultiplicativeElement);
 #!
 GModElementType := NewType(NewFamily("GModElementFamily"), IsGModElementObj);
 

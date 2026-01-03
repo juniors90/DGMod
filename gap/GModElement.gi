@@ -12,7 +12,7 @@ end;
 
 ###########################################################
 # Print methods installation
-###########################################################
+##########################################################
 
 InstallMethod(ViewString, "show G-Module element", [IsGModElementObj],
     function(t)
@@ -21,12 +21,18 @@ InstallMethod(ViewString, "show G-Module element", [IsGModElementObj],
         );
 end);
 
+
 InstallMethod(String, "convert G-Module element to string", [IsGModElementObj],
     function(t)
         return Concatenation(
-            "( ", ViewString(GrpElement(t)), " , ", String(VSpaceElement(t)), " )"
+            "( ", String(GrpElement(t)), " , ", String(VSpaceElement(t)), " )"
         );
 end);
+
+InstallMethod( PrintObj, "for G-Module element", [ IsGModElementObj ],
+  function( t )
+    Print(String(t));
+end );
 
 InstallMethod(\=, "equiality for GModuleElement elements", [IsGModElementObj, IsGModElementObj],
     function(x,y)

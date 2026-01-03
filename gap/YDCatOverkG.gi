@@ -64,37 +64,36 @@ end);
 InstallMethod(ViewString, "show D(G)-Module", [IsSimplesModYDObj],
     function(s)
         return Concatenation(
-            "<Simple D(G)-Module with weight ( g := ", ViewString(Weight(s).g), ", rho := ", String(Weight(s).rho), " )>"
+            "<Simple D(G)-Module with weight ( g = ", ViewString(Weight(s).g), ", rho = ", String(Weight(s).rho), " )>"
         );
 end);
 
 InstallMethod(String, "show D(G)-Module to string", [IsSimplesModYDObj],
     function(s)
         return Concatenation(
-            "Weight := \n g := ", ViewString( Weight( s ).g ),
-                    ", \n rho := ", String( Weight( s ).rho ), "\n",
-            "M(g, rho) := ", String( Simple( s ) ), "\n",
-            "Base := ", ViewString( Base( s ) ), "\n",
-            "G := ", ViewString( GroupAttachedToMod(s)), "\n",
-            "Structure Description of G := ", StructureDescription(GroupAttachedToMod(s)), "\n",
-            "G_g := ", ViewString( G_g(s) ), "\n",
-            "Structure Description of G_g := ", StructureDescription(G_g(s)), "\n"
+            "Weight = \n g = ", ViewString( Weight( s ).g ),
+                   ", \n rho = ", String( Weight( s ).rho ), "\n",
+            "M(g, rho) = ", String( Simple( s ) ), "\n",
+            "Base = ", ViewString( Base( s ) ), "\n",
+            "G = ", ViewString( GroupAttachedToMod(s)), "\n",
+            "Structure Description of G = ", StructureDescription(GroupAttachedToMod(s)), "\n",
+            "G_g = ", ViewString( G_g(s) ), "\n",
+            "Structure Description of G_g = ", StructureDescription(G_g(s)), "\n"
         );
 end);
 
 InstallMethod( Display, "for D(G)-Module object", [ IsSimplesModYDObj],
   function( s )
-
     Print(
         Concatenation(
-            "Weight := \n g := ", ViewString( Weight( s ).g ),
-                    ", \n rho := ", String( Weight( s ).rho ), "\n",
-            "M(g, rho) := ", String( Simple( s ) ), "\n",
-            "Base := ", ViewString( Base( s ) ), "\n",
-            "G := ", ViewString( GroupAttachedToMod(s)), "\n",
-            "Structure Description of G := ", StructureDescription(GroupAttachedToMod(s)), "\n",
-            "G_g := ", ViewString( G_g(s) ), "\n",
-            "Structure Description of G_g := ", StructureDescription(G_g(s)), "\n"
+            "Weight = \n g = ", ViewString( Weight( s ).g ),
+                   ", \n rho = ", String( Weight( s ).rho ), "\n",
+            "M(g, rho) = ", String( Simple( s ) ), "\n",
+            "Base = ", ViewString( Base( s ) ), "\n",
+            "G = ", ViewString( GroupAttachedToMod(s)), "\n",
+            "Structure Description of G = ", StructureDescription(GroupAttachedToMod(s)), "\n",
+            "G_g = ", ViewString( G_g(s) ), "\n",
+            "Structure Description of G_g = ", StructureDescription(G_g(s)), "\n"
         )
     );
   end );

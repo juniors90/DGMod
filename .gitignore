@@ -26,3 +26,6 @@
 
 /tmp/
 /gh-pages/
+doc/*.xml
+temp_logs/
+*.log
