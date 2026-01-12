@@ -1,5 +1,5 @@
 ---
-title: 'YDCatOverkG: A GAP package for Compute simples object in the Yetter-Drinfeld Categories over Group Algebras.'
+title: 'DGMod: A GAP package for Compute simples object in the Yetter-Drinfeld Categories over Group Algebras.'
 tags:
   - GAP
   - Yetter-Drinfeld categories

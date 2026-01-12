@@ -1,5 +1,5 @@
 #
-# YDCatOverkG: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
+# DGMod: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
 #
 # This file contains package meta data. For additional information on
 # the meaning and correct usage of these fields, please consult the
@@ -8,8 +8,8 @@
 #
 SetPackageInfo( rec(
 
-PackageName := "YDCatOverkG",
-Subtitle := "Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.",
+PackageName := "DGMod",
+Subtitle := "Computations with left modules over the Drinfeld Double of a Group.",
 Version := "0.1",
 Date := "31/12/2025", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
@@ -30,10 +30,10 @@ Persons := [
 
 SourceRepository := rec(
     Type := "git",
-    URL := "https://github.com/juniors90/YDCatOverkG",
+    URL := "https://github.com/juniors90/DGMod",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := "https://juniors90.github.io/YDCatOverkG/",
+PackageWWWHome  := "https://juniors90.github.io/DGMod/",
 PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
@@ -55,7 +55,7 @@ Status := "dev",
 AbstractHTML   :=  "",
 
 PackageDoc := rec(
-  BookName  := "YDCatOverkG",
+  BookName  := "DGMod",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
@@ -94,10 +94,10 @@ AutoDoc := rec(
         Copyright := Concatenation(
             "&copyright; 2025-2026 by Juan David Ferreira<P/>\n\n",
             "This package may be distributed under the terms and conditions ",
-            "of the GNU Public License Version 2 or (at your option) any later version.\n"
+            "of the GNU Public License Version 2 or any later version.\n"
             ),
         Abstract := Concatenation(
-            "&YDCatOverkG; is a &GAP; package that allows you to compute ",
+            "&DGMod; is a &GAP; package that allows you to compute ",
             "the simple objects of the Yetter–Drinfeld categories over ",
             "group algebras.\n"
             ),

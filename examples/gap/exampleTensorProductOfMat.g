@@ -3,7 +3,7 @@
 #! @Section Kronecker Product
 #! 
 #! @BeginExampleSession
-#! gap> LoadPackage("YDCatOverkG", "0", false);
+#! gap> LoadPackage("DGMod", "0", false);
 #! true
 #! gap> G := SymmetricGroup(3);
 #! Sym( [ 1 .. 3 ] )

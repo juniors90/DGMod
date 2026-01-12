@@ -1,5 +1,5 @@
 #
-# YDCatOverkG: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
+# DGMod: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
 #
 # This file is a script which compiles the package manual.
 #
@@ -11,8 +11,8 @@ fi;
 LoadPackage( "GAPDoc" );
 SetGapDocLaTeXOptions( "utf8" );
 
-bib := ParseBibFiles( "doc/YDCatOverkG.bib" );
-WriteBibXMLextFile( "doc/YDCatOverkGBib.xml", bib );
+bib := ParseBibFiles( "doc/DGMod.bib" );
+WriteBibXMLextFile( "doc/DGModBib.xml", bib );
 
 AutoDoc( rec(
     autodoc := rec(
@@ -34,7 +34,7 @@ AutoDoc( rec(
         ),
     ),
     scaffold := rec(
-        bib := "YDCatOverkGBib.xml",
+        bib := "DGModBib.xml",
     ),
 ) );
 

@@ -6,7 +6,7 @@
 #! modules over the group algebra $kG$ for $G = S_4$
 #!
 #! @BeginExampleSession
-#! gap> LoadPackage("YDCatOverkG", "0", false);
+#! gap> LoadPackage("DGMod", "0", false);
 #! true
 #! gap> simples:= [];;
 #! gap> S4 := SymmetricGroup(4);

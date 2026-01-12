@@ -3,7 +3,7 @@
 #! @Section Define a Delta Function for an element of G
 #!
 #! @BeginExampleSession
-#! gap> LoadPackage("YDCatOverkG", "0", false);
+#! gap> LoadPackage("DGMod", "0", false);
 #! true
 #! gap> G:=SymmetricGroup(3);;
 #! gap> elmsG := Elements(G);

@@ -17,15 +17,12 @@
 
 InstallGlobalFunction( TensorProductOfMat, function( A, B )
     local u, v, matrix;
-    
     matrix := [ ];
-    
     for u in A do
         for v in B do
             Add( matrix, Flat( List( u, x -> x * v ) ) );
         od;
     od;
-
     return matrix ;
 end);
 

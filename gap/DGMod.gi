@@ -1,6 +1,6 @@
 
 #
-# YDCatOverkG: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
+# DGMod: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
 #
 # Implementations
 #

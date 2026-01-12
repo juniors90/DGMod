@@ -1,9 +1,9 @@
 #!
-#! YDCatOverkG: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
+#! DGMod: Compute simples object for the Yetter-Drinfeld Categories over Group Algebras.
 #!
 #! @Chapter Introduction
 #!
-#! YDCatOverkG is a package which does some
+#! DGMod is a package which does some
 #! interesting and cool things
 #!
 #! @Chapter Object of Yetter–Drinfeld categories over group algebras.

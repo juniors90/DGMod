@@ -7,7 +7,7 @@
 #! $h\in G = \mathbb{S}_{3}$
 #!
 #! @BeginExample DeltaFunctionForElementOfG
-LoadPackage("YDCatOverkG", "0", false);
+LoadPackage("DGMod", "0", false);
 #! true
 G := SymmetricGroup(3);
 #! Sym( [ 1 .. 3 ] )

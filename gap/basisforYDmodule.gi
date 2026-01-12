@@ -1,7 +1,10 @@
 
+###############################################################
+## Function to compute the k-basis for M(g, rho) as D(G)-mod
+###############################################################
 
 InstallGlobalFunction( TensorBasisForSimpleMod, function( G, g, rho )
-    local rec_rho, Vbase, cosets, Gbase, TensorBase, idxs, Gamma_g;
+    local rec_rho, Vbase, cosets, E_g, TensorBase, idxs, Gamma_g;
 
     # Computamos la representación usando Serre
     rec_rho := REPN_ComputeUsingSerre(rho);
@@ -14,64 +17,76 @@ InstallGlobalFunction( TensorBasisForSimpleMod, function( G, g, rho )
     cosets := RightCosets(G, Gamma_g);
 
     # Tomamos un representante de cada coset
-    Gbase := List( cosets, c -> Representative( c ) );
+    E_g := List( cosets, c -> Representative( c ) );
     
     # Armamos la base del tensor kG ⊗ V como pares formales
-    TensorBase := List(Cartesian(Gbase, Vbase), x -> GModElement( x[1], x[2] ));
+    TensorBase := List(Cartesian(E_g, Vbase), x -> BasisElement( x[1], x[2] ));
 
     return TensorBase;
 end);
 
 
+###############################################################
+## Function to compute 
+###############################################################
+
 InstallGlobalFunction( GetCentralizers, function( G )
-    local c, conjClasses, rep, size, ratio, centralizer, centralizers;
+    local conjClass, conjClasses, rep, size, ratio, centralizer, centralizers, centralizer_and_rep;
     
     centralizers := [];
     
     conjClasses:= ConjugacyClasses( G );
     
-    for c in conjClasses do
-        rep := Representative(c);
-        size := Size(c);
+    for conjClass in conjClasses do
+        rep := Representative(conjClass);
+        size := Size(conjClass);
         centralizer := Centralizer(G, rep);
         # Verificación de la fórmula |clase| = |G| / |centralizador|
         ratio := Size(G) / Size(centralizer);
         if ratio = size then
-            Add(centralizers, rec(centralizer := centralizer, g := rep));;
+            centralizer_and_rep:=rec(centralizer := centralizer, g := rep);
+            Add( centralizers, centralizer_and_rep );;
         else
-            Print("¡Error en la verificación!\n");
+            Error("¡Verification error!\n");
         fi;
     od;
     return centralizers;
 end);
 
+###############################################################
+## Function to compute 
+###############################################################
 
 InstallGlobalFunction(GetCentralizerOfElement, function(G, g )
-    local centralizer, sizeG, sizeC, classSize, idx, repElementSDP;
+    local repElementsCC, centralizer, sizeG, sizeGg, ratio, conjClass, size;
 
-    if not (g in List(ConjugacyClasses(G), Representative)) then
+    repElementsCC := List( ConjugacyClasses( G ), Representative );
+
+    if not ( g in repElementsCC ) then
         Error("The element g is not a representative of the conjugation class of G.\n");
     fi;
-    
-    # Calcula el centralizador de g en G
-    centralizer := Centralizer(G, g);
-    
-    # (opcional) verificamos la fórmula |clase| = |G| / |centralizador|
-    sizeG := Size(G);
-    sizeC := Size(centralizer);
-    classSize := sizeG / sizeC;
 
-    # Devolvemos un registro con la info
-    return rec(
-        G := G,
-        g := g,
-        centralizer := centralizer,
-        classSize := classSize,
-        centralizerSize := sizeC,
-        structure := StructureDescription( centralizer ),
-    );
+    centralizer := Centralizer( G, g );
+    sizeG := Order( G );
+    sizeGg := Order( centralizer );
+    ratio := sizeG / sizeGg;
+    conjClass := Filtered( ConjugacyClasses( G ), x -> g in x )[1];
+    size := Size( conjClass );
+
+    if ratio = size then
+        return rec(
+            G := G,
+            g := g,
+            centralizer := centralizer,
+        );
+    else
+        Error("¡Verification error!\n");
+    fi;
 end);
 
+###############################################################
+## Function to compute 
+###############################################################
 
 ComputeSimples@:=function(G, g, irrepsGamma_g )
     local chi, rho, weight, simples;
@@ -84,16 +99,31 @@ ComputeSimples@:=function(G, g, irrepsGamma_g )
     return simples;
 end;
 
+###############################################################
+## Function to compute 
+###############################################################
 
 InstallGlobalFunction( SimplesModByCentralizer, function( G_g )
     local irrepsGamma_g, simples, G, g;
+    if not IsRecord(G_g) then
+        Error("Expected a record");
+    fi;
+
+    if not ( IsBound(G_g.G) and IsBound(G_g.g) and IsBound(G_g.centralizer) ) then
+        Error("Record must have keys G, g, centralizer");
+    fi;
+
     irrepsGamma_g := Irr( G_g.centralizer );
     G := G_g.G;
     g := G_g.g;
     simples := ComputeSimples@(G, g, irrepsGamma_g);
+    
     return simples;
 end );
 
+###############################################################
+## Function to compute 
+###############################################################
 
 InstallGlobalFunction(SimplesMod, function(G)
     local c, irrepsGamma_g, simples, centralizers;
@@ -106,10 +136,14 @@ InstallGlobalFunction(SimplesMod, function(G)
     return simples;
 end);
 
+###############################################################
+## Function to compute 
+###############################################################
 
 InstallGlobalFunction( SimplesModAttachedToElement, function(G, g )
-    local irrepsGamma_g, simples ;
-    irrepsGamma_g := Irr(  Centralizer(G, g) );
+    local irrepsGamma_g, simples, centralizer;
+    centralizer:=Centralizer(G, g);
+    irrepsGamma_g := Irr( centralizer );
     simples := ComputeSimples@(G, g, irrepsGamma_g);
     return simples;
 end );
