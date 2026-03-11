@@ -10,35 +10,30 @@
 #
 gap> START_TEST("dgmod01.tst");
 
-# doc/_Chunks.xml:70-99
+# doc/_Chunks.xml:2-26
 gap> LoadPackage("DGMod", "0", false);
 true
-gap> G:=SymmetricGroup(3);
+gap> simples:= [];;
+gap> S3 := SymmetricGroup(3);
 Sym( [ 1 .. 3 ] )
-gap> repCC:=List(ConjugacyClasses(G), Representative);
+gap> repsCC:=List(ConjugacyClasses(S3), Representative);
 [ (), (1,2), (1,2,3) ]
-gap> simples_attached_to_e := SimplesModAttachedToElement( G, repCC[1] );
-[ <Simple D(G)-Module with Weight ( () , rho )>, 
-  <Simple D(G)-Module with Weight ( () , rho )>, 
-  <Simple D(G)-Module with Weight ( () , rho )> ]
-gap> rho:=simples_attached_to_e[3];
-<Simple D(G)-Module with Weight ( () , rho )>
-gap> product1:=TensorProductOfSimplesModYD(rho, rho);
-rec( dimension := 4, generatorsofgroup := [ (1,2,3), (1,2) ], 
-  genimages := 
-    [ 
-      [ [ E(3), 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, E(3)^2 ] 
-         ], 
-      [ [ 0, 0, 0, E(3)^2 ], [ 0, 0, 1, 0 ], [ 0, 1, 0, 0 ], 
-          [ E(3), 0, 0, 0 ] ] ], group := S3, isRepresentation := true, 
-  rho := [ (1,2,3), (1,2) ] -> 
-    [ 
-      [ [ E(3), 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, E(3)^2 ] 
-         ], 
-      [ [ 0, 0, 0, E(3)^2 ], [ 0, 0, 1, 0 ], [ 0, 1, 0, 0 ], 
-          [ E(3), 0, 0, 0 ] ] ] )
-gap> product1=rho*rho;
-true
+gap> g := repsCC[3];
+(1,2,3)
+gap> S3_g := Centralizer( S3, g );
+Group([ (1,2,3) ])
+gap> irrepsS3_g := Irr( S3_g  );;
+gap> for chi in irrepsS3_g do
+> rho := IrreducibleAffordingRepresentation( chi );
+> weight := rec( g := g, rho := rho );
+> Add( simples, SimplesDGMod( S3, weight) );
+> od;
+gap> simples;
+[ <Simple D(G)-Module with Weight ( (1,2,3) , rho )>, 
+  <Simple D(G)-Module with Weight ( (1,2,3) , rho )>, 
+  <Simple D(G)-Module with Weight ( (1,2,3) , rho )> ]
+gap> simples[1];
+<Simple D(G)-Module with Weight ( (1,2,3) , rho )>
 
 #
 gap> STOP_TEST("dgmod01.tst", 1);

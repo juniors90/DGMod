@@ -6,31 +6,173 @@
 #! DGMod is a package which does some
 #! interesting and cool things
 #!
-#! @Chapter Object of Yetter–Drinfeld categories over group algebras.
+#! @Chapter Object of Yetter-Drinfeld categories over group algebras.
 #!
-#! @Section Definition of SimplesModYD Object
+#! Through this work $\Bbbk$ denotes an algebraically closed field of characteristic zero. 
+#! The dual of a vector space $V$ will be denoted by $V^*$. 
+#! If $v \in V$ and $f \in V^*$, then $\langle f, v \rangle$ denotes the evaluation of $f$ in $v$. 
 #!
-#! @Arguments SimplesModYDObj
-DeclareRepresentation("IsSimplesModYDRep", IsAttributeStoringRep, []);
-#! @Arguments SimplesModYDObj
-DeclareCategory("IsSimplesModYDObj", IsSimplesModYDRep and IsMultiplicativeElement);
-SimplesModYDType := NewType(NewFamily("YDkGFamily"), IsSimplesModYDObj);
+#! Let $S$ be a set. We write $\Bbbk S$ for the free vector space on $S$.
 #!
-#! @BeginGroup SimplesModYDGroup
-#! @Arguments SimplesModYDObj
-DeclareAttribute("Simple", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("Weight", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("Base", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("GeneratorsOfG", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("GeneratorsOfImages", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("GroupAttachedToMod", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("StructureDescriptionOfG", IsSimplesModYDObj);
-#! @Arguments SimplesModYDObj
-DeclareAttribute("G_g", IsSimplesModYDObj);
-#! @EndGroup 
+#! Let $A$ be an algebra. By an $A$-module, we mean a left $A$-module. 
+#! If $S$ is a subset of an $A$-module $M$ and $B \subseteq A$, then $BS$ denotes the set of all $bs$ with $b \in B$ and $s \in S$.
+#! 
+#! Let $H$ be a finite-dimensional Hopf algebra. 
+#! We denote by $\Delta$, $\mathcal{S}$ and $\varepsilon$ the comultiplication, the antipode and the counit of $H$. 
+#! We will use the Sweedler notation $\Delta(h)=h_{(1)} \otimes h_{(2)}$ for the comultiplication of any $h \in H$, 
+#! and for the coaction $\delta(m)=m_{(-1)} \otimes m_{(0)}$ of an element $m$ belonging to an $H$-comodule.
+#!
+#! Recall that ${}^H_H\mathcal{YD}$ denotes the category of Yetter-Drinfeld modules over $H$, whose objects are the $H$-modules and $H$-comodules $M$ such that for every $h \in H$ and $m \in M$ it holds that
+#! $$
+#! (hm)_{(-1)} \otimes (hm)_{(0)} 
+#! = h_{(1)} m_{(-1)} \mathcal{S}(h_{(3)}) \otimes h_{(2)} m_{(0)}.
+#! $$
+#!
+#! @Section Drinfeld double of an Hopf algebra
+#!
+#! We consider the Drinfeld double $\mathcal{D}(H)$ of $H$ according to <Cite Key='majid2000foundations'/>. 
+#! Namely, $\mathcal{D}(H)$ is $H \otimes H^*$ as coalgebra. 
+#! Meanwhile, the multiplication and the antipode are given by
+#! @LatexOnly \input{picture.tex}
+#! for every $h,h' \in H$ and $f,f' \in H^*$.
+#!
+#! In consequence, we have that $H$ and $H^{*\,\mathrm{op}}$ are Hopf subalgebras of $\mathcal{D}(H)$.
+#!
+#! Recall that the category ${}^H_H\mathcal{YD}$ is braided equivalent to the category ${}_{\mathcal{D}(H)}\mathcal{M}$ 
+#! of $\mathcal{D}(H)$-modules. 
+#! Namely, if $M \in {}^H_H\mathcal{YD}$, then $M$ is a $\mathcal{D}(H)$-module by setting
+#! $$
+#! (hf)\cdot m = \langle f, m_{(-1)} \rangle \, h m_{(0)},
+#! $$
+#! for every $h \in H$, $f \in H^*$ and $m \in M$.
+#
+#! @Section The dual Hopf algebra of the group algebra
+#!
+#! Let $\Gamma$ be a finite group. The unity element of $\Gamma$
+#! is denoted by $e$. We set $\Bbbk^\Gamma = (\Bbbk \Gamma)^\ast$,
+#! the dual Hopf algebra of the group algebra $\Bbbk \Gamma$. 
+#! Let $\{\delta_g\}_{g \in \Gamma}$ be the dual basis of the
+#! canonical basis $\{g\}_{g \in \Gamma}$ of $\Bbbk \Gamma$. 
+#! The comultiplication of an element $\delta_g$ is
+#! $$
+#! \Delta(\delta_g)=\sum_{t\in\Gamma}\delta_t\otimes\delta_{t^{-1}g}.
+#! $$
+#! Let $M$ be a $\Bbbk^\Gamma$-module and $g \in \Gamma$. 
+#! Then $M$ is $\Gamma$-graded with homogeneous component of degree $g$:
+#! $$
+#! M[g]=\delta_g M=\{m\in M\mid f\cdot m=\langle f,g\rangle m, \forall f\in\Bbbk^\Gamma\}.
+#! $$
+#! If $S \subseteq M$, we set $S[g] = S \cap M[g]$. 
+#! We denote by $\operatorname{Supp} M$ the subset of $\Gamma$
+#! formed by those elements whose homogeneous component in $M$
+#! is non-zero. The one-dimensional $\Bbbk^\Gamma$-module of
+#! degree $g$ will be denoted $\Bbbk_g$.
+#!
+#! If $\Bbbk^\Gamma$ is a subalgebra of $A$, then we will
+#! consider $A$ as a $\Bbbk^\Gamma$-algebra with the adjoint
+#! action, that is $f \rhd a = \operatorname{Ad}(f)a = f_{(1)}
+#! a \mathcal{S}(f_{(2)})$ for any $a \in A$ and $f \in \Bbbk^\Gamma$.
+#!
+#! Let $\Gamma$ be a finite group. Let $\Bbbk \Gamma$ be the
+#! group algebra of $\Gamma$ over $\Bbbk$, whose characteristic
+#! does not divide the order of $\Gamma$.
+#!
+#! @Section Simple modules attached to an element
+#! 
+#!
+#! Let $\mathbb{S}_3$ be the group of bijections on $\{1, 2, 3\}$.
+#! We set $\sigma = (12)$ and $\tau = (123)$. These two cycles generate
+#! $\mathbb{S}_3$ and satisfy the relations $\sigma^2 = e = \tau^3$
+#! and $\sigma \tau \sigma = \tau^{-1}$. The conjugacy classes of $\mathbb{S}_3$ are
+#! $$
+#! \mathcal{O}_e = \{e\}, \mathcal{O}_\sigma = \{(12), (13), (23)\} \text{ and } \mathcal{O}_\tau = \{(123), (132)\}.
+#! $$
+#! Next, we describe the simple $\mathfrak{D}(\mathbb{S}_3)$-modules.
+#! 
+#! The centralizer $\Gamma_\sigma$ is just the cyclic subgroup
+#! generated by $\sigma$. Then $\mathcal{C}_\sigma$ has only two irreducible
+#! representations: the trivial one and the induced by the sign map
+#! $\text{sgn} : \mathbb{S}_3 \to \{\pm 1\}$. Therefore the simple
+#! $\mathfrak{D}(\mathbb{S}_3)$-modules attached to $\sigma$ are
+#! $$
+#! M(\sigma, +) := M(\sigma, \varepsilon) \quad \text{and} \quad M(\sigma, -) := M(\sigma, \text{sgn}).
+#! $$
+#! Let us consider the set of symbols $\{ |12\rangle_{\pm}, |23\rangle_{\pm},
+#! |13\rangle_{\pm} \}$ as a basis of $M(\sigma, \pm)$. Sometimes we write
+#! $|\sigma \tau^t\rangle_{\pm}$ instead of $|ij\rangle_{\pm}$ if
+#! $\sigma \tau^t = (ij)$, and omit the subscript if there is no place
+#! for confusion. Hence the action of $\mathfrak{D}(\mathbb{S}_3)$ on
+#! $M(\sigma, \pm)$ is defined in such a way that
+#! $|\sigma \tau^t\rangle_{\pm}$ has $\mathbb{S}_3$-degree
+#! $\sigma \tau^t$ and
+#! $$
+#! \sigma\cdot|\sigma\tau^t\rangle_{\pm}
+#! =\pm|\sigma\tau^{-t}\rangle_{\pm}\quad\text{and}\quad\tau\cdot|\sigma\tau^t\rangle_{\pm}
+#! =|\sigma\tau^{t+1}\rangle_{\pm}.
+#! $$
+#!
+#! @InsertChunk Example_SimplesDGMod
+#!
+#! @Chapter Object of Yetter-Drinfeld categories over group algebras.
+#!
+#! @Section Definition of SimplesDGMod Object
+#!
+#! We denote by $\mathcal{D}(\Gamma)$ the Drinfeld Double of $\Bbbk \Gamma$. 
+#! Since $\Bbbk^ \Gamma$ is a commutative algebra, $\Bbbk^\Gamma$ and $\Bbbk \Gamma$
+#! are Hopf subalgebras of $\mathcal{D}(\Gamma)$. 
+#! Then the algebra structure of $\mathcal{D}(\Gamma)$ is completely determined by
+#! $$
+#! \delta_h g = g \, \delta_{g^{-1} h g}, 
+#! \qquad \forall\, g,h \in \Gamma, \ \text{cf.\ \eqref{eq:drinfeld}} .
+#! $$
+#! 
+#! These are well-known because they are equivalent to the simple objects in
+#! ${}_{\Bbbk^\Gamma}^{\Bbbk \Gamma}\mathcal{YD}$ 
+#! and a description of these last can be found for instance in <Cite Key='AG'/>. 
+#! We recall this description but in the context of modules over $\mathcal{D}(\Gamma)$.
+#!
+#! Let $\mathcal{O}_g$ be the conjugacy class of $g \in \Gamma$, 
+#! $\Gamma_g$ the centralizer of $g$ and $(U,\varrho)$ an irreducible representation of $\Gamma_g$. 
+#! The $\Bbbk \Gamma$-module induced by $(U,\varrho)$,
+#! $$
+#! M(g,\varrho) = \opratorname{Ind}_{\Gamma_g}^\Gamma U = \Bbbk \Gamma \otimes_{\Bbbk \Gamma_g} U,
+#! $$
+#! is also a $\Bbbk^\Gamma$-module if we define the action by
+#! $$
+#! f \cdot (x \otimes_{\Bbbk \Gamma_g} u)
+#! =
+#! \langle f, x g x^{-1} \rangle \, x \otimes_{\Bbbk \Gamma_g} u,
+#! \qquad
+#! \text{for all } f \in \Bbbk^\Gamma,\ x \in \Gamma,\ u \in U.
+#! $$
+#! Then $x \otimes_{\Bbbk \Gamma_g} u$ is of $\Gamma$-degree $x g x^{-1}$ and 
+#! $\operatorname{Supp} M(g,\varrho) = \mathcal{O}_g$. 
+#! Note that $\dim M(g,\varrho) = \# \mathcal{O}_g \cdot \dim U$.
+#! Therefore $M(g,\varrho)$ is a $\mathcal{D}(\Gamma)$-module. 
+#! Moreover, $M(g,\varrho)$ is simple and every simple
+#! $\mathcal{D}(\Gamma)$-module is of this form by <Cite Key='AG'/>.
+#!
+#! @LatexOnly \input{defi.tex}
+#!
+#! @Arguments SimplesDGModObj
+DeclareRepresentation("IsSimplesDGModRep", IsAttributeStoringRep, []);
+#! @Arguments SimplesDGModObj
+DeclareCategory("IsSimplesDGModObj", IsSimplesDGModRep and IsMultiplicativeElement);
+SimplesDGModType := NewType(NewFamily("YDkGFamily"), IsSimplesDGModObj);
+#!
+#! @Arguments SimplesDGModObj
+DeclareAttribute("Simple", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("Weight", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("Base", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("GeneratorsOfG", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("GeneratorsOfImages", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("GroupAttachedToMod", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("StructureDescriptionOfG", IsSimplesDGModObj);
+#! @Arguments SimplesDGModObj
+DeclareAttribute("G_g", IsSimplesDGModObj);

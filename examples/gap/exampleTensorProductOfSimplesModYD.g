@@ -1,8 +1,8 @@
-#! @Chapter Object of Yetter–Drinfeld categories over group algebras.
+#! @Chapter Object of Yetter-Drinfeld categories over group algebras.
 #!
 #! @Section Tensor Product Of Simple
 #!
-#! @BeginChunk Example_TensorProductOfSimplesModYD
+#! @BeginChunk Example_TensorProductOfSimplesDGMod
 #! @BeginExampleSession
 #! gap> LoadPackage("DGMod", "0", false);
 #! true
@@ -16,7 +16,7 @@
 #!   <Simple D(G)-Module with Weight ( () , rho )> ]
 #! gap> rho:=simples_attached_to_e[3];
 #! <Simple D(G)-Module with Weight ( () , rho )>
-#! gap> product1:=TensorProductOfSimplesModYD(rho, rho);
+#! gap> product1:=TensorProductOfSimplesDGMod(rho, rho);
 #! rec( dimension := 4, generatorsofgroup := [ (1,2,3), (1,2) ], 
 #!   genimages := 
 #!     [ 

@@ -5,11 +5,11 @@
 # Implementations
 #
 
-SimplesModYD := function( G, weight)
+SimplesDGMod := function( G, weight)
     local obj, M_g_rho, base, gens, mgens, newrho, x;
     M_g_rho := InducedSubgroupRepresentation( G, weight.rho );;
-    base := TensorBasisForSimpleMod( G, weight.g, weight.rho );;
-    obj := Objectify( SimplesModYDType, rec( ) );
+    base := TensorBasisForSimpleDGMod( G, weight.g, weight.rho );;
+    obj := Objectify( SimplesDGModType, rec( ) );
 	SetSimple( obj, M_g_rho);
     SetWeight( obj, weight );
     SetBase( obj, base );
@@ -26,16 +26,16 @@ end;
 #############################################################################
 
 InstallMethod(\*,
-    "multiply two SimplesModYD object",
-    [IsSimplesModYDObj, IsSimplesModYDObj],
+    "multiply two SimplesDGMod object",
+    [IsSimplesDGModObj, IsSimplesDGModObj],
     function( simple1, simple2 )
     local gens, mgens, gen1, gen2, newrho, rep;
 
-    if not( IsSimplesModYDObj( simple1 ) ) then
-        Error("first argument must be a SimplesModYDObj.");
+    if not( IsSimplesDGModObj( simple1 ) ) then
+        Error("first argument must be a SimplesDGModObj.");
     fi;
-    if not( IsSimplesModYDObj( simple2 ) ) then
-        Error("second argument must be a SimplesModYDObj.");
+    if not( IsSimplesDGModObj( simple2 ) ) then
+        Error("second argument must be a SimplesDGModObj.");
     fi;
 
     gens  := simple1!.GeneratorsOfG;
@@ -61,14 +61,14 @@ end);
 # Print methods installation
 ###########################################################
 
-InstallMethod(ViewString, "show D(G)-Module", [IsSimplesModYDObj],
+InstallMethod(ViewString, "show D(G)-Module", [IsSimplesDGModObj],
     function(s)
         return Concatenation(
             "<Simple D(G)-Module with Weight ( ", ViewString(Weight(s).g), " , rho )>"
         );
 end);
 
-InstallMethod(String, "show D(G)-Module to string", [IsSimplesModYDObj],
+InstallMethod(String, "show D(G)-Module to string", [IsSimplesDGModObj],
     function(s)
         return Concatenation(
             "Weight = \n g = ", ViewString( Weight( s ).g ),
@@ -85,7 +85,7 @@ end);
 InstallMethod(
     Display,
     "for D(G)-Module object",
-    [ IsSimplesModYDObj],
+    [ IsSimplesDGModObj],
     function( s )
         Print( "Weight = \n" );
         Print("g = ", ViewString( Weight( s ).g ), ",\n");

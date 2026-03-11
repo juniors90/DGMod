@@ -30,6 +30,22 @@ AutoDoc( rec(
                 \usepackage[utf8]{inputenc}
                 \DeclareUnicodeCharacter{2297}{otimes}
                 \DeclareUnicodeCharacter{03C1}{rho}
+                \theoremstyle{plain}
+                \newtheorem{prop}{Proposition}[section]
+                \newtheorem{alg}[prop]{Algorithm}
+                \newtheorem{thm}[prop]{Theorem}
+                \newtheorem{coro}[prop]{Corollary}
+                \newtheorem{scholium}[prop]{Scholium}
+                \newtheorem{lemma}[prop]{Lemma}
+                \newtheorem{conj}{Conjecture}
+                \newtheorem*{exer}{Exercise}
+                \newtheorem{ass}{Assumption}
+                \newtheorem*{thmA}{Theorem A}
+                \newtheorem{problem}[prop]{Problem}
+                \theoremstyle{definition}
+                \newtheorem{definition}[prop]{Definition}
+                \newtheorem*{notation}{Notation}
+                \newtheorem{exam}[prop]{Example}
             """,
         ),
     ),

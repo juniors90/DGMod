@@ -10,23 +10,19 @@
 #
 gap> START_TEST("dgmod05.tst");
 
-# doc/_Chunks.xml:47-64
+# doc/_Chunks.xml:58-71
 gap> LoadPackage("DGMod", "0", false);
 true
-gap> G:=SymmetricGroup(3);
+gap> G := SymmetricGroup(3);
 Sym( [ 1 .. 3 ] )
-gap> repCC:= List(ConjugacyClasses(G), Representative);
+gap> repsCC := List(ConjugacyClasses(G), Representative);
 [ (), (1,2), (1,2,3) ]
-gap> simples_attached_to_e := SimplesModAttachedToElement( G, repCC[1] );
+gap> G_e := GetCentralizerOfElement(G, repsCC[1] );
+rec( G := Sym( [ 1 .. 3 ] ), centralizer := Group([ (1,3), (2,3) ]), g := () )
+gap> SimplesModByCentralizer(G_e);
 [ <Simple D(G)-Module with Weight ( () , rho )>, 
   <Simple D(G)-Module with Weight ( () , rho )>, 
   <Simple D(G)-Module with Weight ( () , rho )> ]
-gap> simples_attached_to_12 := SimplesModAttachedToElement( G, repCC[2] );
-[ <Simple D(G)-Module with Weight ( (1,2) , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2) , rho )> ]
-gap> simples_attached_to_123 := SimplesModAttachedToElement( G, repCC[2] );
-[ <Simple D(G)-Module with Weight ( (1,2) , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2) , rho )> ]
 
 #
 gap> STOP_TEST("dgmod05.tst", 1);

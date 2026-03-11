@@ -14,7 +14,7 @@
 #! 
 DeclareGlobalFunction( "TensorProductOfMat" );
 
-#! @Chapter Object of Yetter–Drinfeld categories over group algebras.
+#! @Chapter Object of Yetter-Drinfeld categories over group algebras.
 #!
 #! @Section Tensor Product Of Simple
 #!
@@ -28,7 +28,7 @@ DeclareGlobalFunction( "TensorProductOfMat" );
 #! The implementation is optimized for speed and has been observed to
 #! outperform GAP's <A>KroneckerProduct</A> in tests with moderately large matrices.
 #! 
-DeclareGlobalFunction( "TensorProductOfSimplesModYD" );
+DeclareGlobalFunction( "TensorProductOfSimplesDGMod" );
 #!
-#! @InsertChunk Example_TensorProductOfSimplesModYD
+#! @InsertChunk Example_TensorProductOfSimplesDGMod
 #!

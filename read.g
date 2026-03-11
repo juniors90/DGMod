@@ -5,7 +5,7 @@
 #
 ReadPackage( "DGMod", "gap/DGMod.gi" );
 ReadPackage( "DGMod", "gap/BasisElement.gi" ); 
-ReadPackage( "DGMod", "gap/basisforYDmodule.gi" ); 
+ReadPackage( "DGMod", "gap/basisforDGModule.gi" ); 
 ReadPackage( "DGMod", "gap/matrixfordeltafunction.gi" );
 ReadPackage( "DGMod", "gap/deltafunction.gi" );
 ReadPackage( "DGMod", "gap/tensorproductofsimples.gi" );

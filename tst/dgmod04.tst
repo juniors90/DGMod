@@ -10,26 +10,26 @@
 #
 gap> START_TEST("dgmod04.tst");
 
-# doc/_Chunks.xml:21-41
+# doc/_Chunks.xml:32-52
 gap> LoadPackage("DGMod", "0", false);
 true
-gap> G := SymmetricGroup(3);
+gap> G:=SymmetricGroup(3);
 Sym( [ 1 .. 3 ] )
-gap> all_simples := SimplesMod( G );
-[ <Simple D(G)-Module with Weight ( () , rho )>, 
-  <Simple D(G)-Module with Weight ( () , rho )>, 
-  <Simple D(G)-Module with Weight ( () , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2) , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2) , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2,3) , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2,3) , rho )>, 
-  <Simple D(G)-Module with Weight ( (1,2,3) , rho )> ]
-gap> dim_drinfelf_double_of_G := Order(G)^2; # dim(D(H))
-36
-gap> sum_squares_of_M_g_rho := Sum(List(all_simples, x -> Length(Base(x))^2));
-36
-gap> dim_drinfelf_double_of_G = sum_squares_of_M_g_rho;
-true
+gap> repsCC:=List(ConjugacyClasses(G), Representative);
+[ (), (1,2), (1,2,3) ]
+gap> g:= repsCC[2];
+(1,2)
+gap> centralizer := Centralizer(G, g);
+Group([ (1,2) ])
+gap> irrepsGamma_g  := Irr( centralizer );
+[ Character( CharacterTable( Sym( [ 1 .. 2 ] ) ),
+  [ 1, 1 ] ), Character( CharacterTable( Sym( [ 1 .. 2 ] ) ), [ 1, -1 ] ) ]
+gap> chi := Irr( centralizer )[2];
+Character( CharacterTable( Sym( [ 1 .. 2 ] ) ), [ 1, -1 ] )
+gap> rho := IrreducibleAffordingRepresentation( chi );
+[ (1,2) ] -> [ [ [ -1 ] ] ]
+gap> TensorBasisForSimpleDGMod( G, g, rho );
+[ ( () , [ 1 ] ), ( (1,3) , [ 1 ] ), ( (1,3,2) , [ 1 ] ) ]
 
 #
 gap> STOP_TEST("dgmod04.tst", 1);

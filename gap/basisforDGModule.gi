@@ -3,7 +3,7 @@
 ## Function to compute the k-basis for M(g, rho) as D(G)-mod
 ###############################################################
 
-InstallGlobalFunction( TensorBasisForSimpleMod, function( G, g, rho )
+InstallGlobalFunction( TensorBasisForSimpleDGMod, function( G, g, rho )
     local rec_rho, Vbase, cosets, E_g, TensorBase, idxs, Gamma_g;
 
     # Computamos la representación usando Serre
@@ -94,7 +94,7 @@ ComputeSimples@:=function(G, g, irrepsGamma_g )
     for chi in irrepsGamma_g do
         rho := IrreducibleAffordingRepresentation( chi );;
         weight := rec( g := g, rho := rho );
-        Add( simples, SimplesModYD( G, weight ) );
+        Add( simples, SimplesDGMod( G, weight ) );
     od;
     return simples;
 end;

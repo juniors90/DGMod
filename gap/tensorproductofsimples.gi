@@ -28,7 +28,7 @@ end);
 
 ##############################################################################
 
-InstallGlobalFunction( TensorProductOfSimplesModYD, function( simple1, simple2 )
+InstallGlobalFunction( TensorProductOfSimplesDGMod, function( simple1, simple2 )
     local gens, mgens, gen1, gen2, newrho, rep, G;
     G  := simple1!.GroupAttachedToMod;
     gens := GeneratorsOfGroup( G );

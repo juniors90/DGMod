@@ -10,7 +10,10 @@
 #! una lista de cosets derechos de $\Gamma_g$ en <A>G</A> y luego
 #! la base del tensor $\Bbbk G \otimes V$ como una lista de pares
 #! formales.
-DeclareGlobalFunction( "TensorBasisForSimpleMod" );
+DeclareGlobalFunction( "TensorBasisForSimpleDGMod" );
+#!
+#! @InsertChunk Example_TensorBasisForSimpleDGMod
+#!
 
 #! @Arguments G
 #! @Returns una lista de $\Gamma_g = \{x \in \Gamma \mid xg = gx\}$
