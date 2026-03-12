@@ -10,29 +10,21 @@
 
 
 
-# The GAP package DGMod
+# DGMod - A GAP package (Building)
 
-TODO: add a description of your package; perhaps also instructions how how to
-install and use it, resp. where to find out more
+**DGMod** is a package for the computer algebra system `GAP` designed to work with modules over the Drinfeld double $D(G)$ of a finite group $G$.
 
+The package provides computational tools for constructing and manipulating $D(G)$-modules and related algebraic structures. In particular, it aims to facilitate explicit computations in the representation theory of the Drinfeld double of finite groups and in related areas such as Hopf algebras, tensor categories, and homological algebra.
 
-## Running tests
+More detailed documentation will be included in future releases.
 
-The package includes an automated test suite following GAP package conventions.
+## Installation
 
-You can run the tests with the GAP test command:
+To install the package, clone the repository into the `pkg` directory of your GAP installation:
 
+```bash
+git clone https://github.com/juniors90/DGMod.git
 ```
-gap> Read("/path/to/the/gap-4.X.Y/pkg/DGMod/makedoc.g");
-```
-
-This runs these tests on GAP and results appear in the terminal.
-
-## Contact
-
-Bug reports, feature requests, and suggestions are welcome and should be submitted via the GitHub issue tracker for this repository.
-
-For questions, discussions, and general support related to **DGMod**, users may also contact the author directly or open an issue on GitHub.
 
 ## License
 
