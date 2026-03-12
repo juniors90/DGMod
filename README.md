@@ -26,6 +26,17 @@ To install the package, clone the repository into the `pkg` directory of your GA
 git clone https://github.com/juniors90/DGMod.git
 ```
 
+## Contact
+
+Bug reports, feature requests, and suggestions are welcome and should be
+submitted through the GitHub issue tracker for this repository.
+
+For questions, discussions, or further information concerning
+**DGMod**, users are encouraged to open an issue on GitHub or
+contact the author directly.
+
+- Juan D. Ferreira: david.ferreira@mi.unc.edu.ar
+
 ## License
 
 DGMod is licensed under the GNU General Public License v2 or later.
